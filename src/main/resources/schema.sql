@@ -1,25 +1,39 @@
-CREATE DATABASE primesoft_cef;
-CREATE USER cef_user WITH ENCRYPTED PASSWORD 'cef_user';
+create DATABASE primesoft_cef;
+create user cef_user with encrypted password 'cef_user';
 GRANT ALL PRIVILEGES ON DATABASE primesoft_cef TO cef_user;
 
 set search_path = 'primesoft_cef';
--- interviewed_by details
 
-CREATE TABLE IF NOT EXISTS candidate_datails
+create table if not exists candidate_datails
 (
-
-    id integer NOT NULL primary key,
-    name varchar  NOT NULL,
-    email varchar NOT NULL,
-    mobile varchar NOT null,
-    communication_skills varchar NOT NULL,
+    id integer not null primary key,
+    candidate_name varchar  not null,
+    email varchar not null,
+    mobile varchar not null,
+    job_id int not null,
+    communication_skills varchar not null,
     domain_knowldge varchar,
-    collaboration_skills varchar NOT NULL,
-    culture_fit varchar NOT NULL
+    collaboration_skills varchar not null,
+    culture_fit varchar not null,
+    created_at timestamp not null,
+    created_by varchar not null,
+    updated_at timestamp,
+    updated_by varchar
+);
+
+create table if not exists employee
+(
+ emp_id int not null primary key,
+ emp_name varchar not null,
+ email varchar not null,
+ created_at timestamp not null,
+ created_by varchar not null,
+ updated_at timestamp,
+ updated_by varchar
 );
 
 
-CREATE TABLE IF NOT EXISTS interview_round
+create table if not exists interview_round
 (
  round_id int not null primary key,
  round_no varchar not null default 'FIRST',
@@ -33,7 +47,8 @@ CREATE TABLE IF NOT EXISTS interview_round
  updated_by varchar
 );
 
-CREATE TABLE IF NOT EXISTS interview_questions
+
+create table if not exists interview_questions
 (
  question_id int not null primary key,
  question_name varchar not null,
@@ -45,16 +60,20 @@ CREATE TABLE IF NOT EXISTS interview_questions
  updated_by varchar
 );
 
-CREATE TABLE IF NOT EXISTS employee
+
+create table if not exists domain_knowledge
 (
- emp_id int not null primary key,
- emp_name varchar not null,
- email varchar not null,
- created_at timestamp not null,
+ id int not null primary key,
+ skill varchar not null,
+ candidate_id int references candidate_datails(id),
+  created_at timestamp not null,
  created_by varchar not null,
  updated_at timestamp,
  updated_by varchar
 );
+
+
+commit;
 
 --CREATE TABLE IF NOT EXISTS candidate_subject_skills
 --(
