@@ -3,10 +3,9 @@ create user cef_user with encrypted password 'cef_user';
 GRANT ALL PRIVILEGES ON DATABASE primesoft_cef TO cef_user;
 
 set search_path = 'primesoft_cef';
-
-create table if not exists candidate_datails
+create table if not exists candidate_details
 (
-    id integer not null primary key,
+    id uuid not null primary key,
     candidate_name varchar  not null,
     email varchar not null,
     mobile varchar not null,
@@ -23,7 +22,7 @@ create table if not exists candidate_datails
 
 create table if not exists employee
 (
- emp_id int not null primary key,
+ emp_id uuid not null primary key,
  emp_name varchar not null,
  email varchar not null,
  created_at timestamp not null,
@@ -35,7 +34,7 @@ create table if not exists employee
 
 create table if not exists interview_round
 (
- round_id int not null primary key,
+ round_id uuid not null primary key,
  round_no varchar not null default 'FIRST',
  rating numeric,
  candidate_id int references candidate_datails(id),
@@ -50,7 +49,7 @@ create table if not exists interview_round
 
 create table if not exists interview_questions
 (
- question_id int not null primary key,
+ question_id uuid not null primary key,
  question_name varchar not null,
  feedback varchar not null,
  iterview_round_no int references interview_round(round_id),
@@ -63,7 +62,7 @@ create table if not exists interview_questions
 
 create table if not exists domain_knowledge
 (
- id int not null primary key,
+ id uuid not null primary key,
  skill varchar not null,
  candidate_id int references candidate_datails(id),
   created_at timestamp not null,
