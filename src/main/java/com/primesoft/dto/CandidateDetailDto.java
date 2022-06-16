@@ -3,7 +3,6 @@ package com.primesoft.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +21,7 @@ public class CandidateDetailDto implements Serializable {
     private String cultureFit;
     private LocalDateTime createdAt;
     private String createdBy;
-    private Instant updatedAt;
+    private LocalDateTime updatedAt;
     private String updatedBy;
     private List<DomainKnowledgeDto> domainKnowledges;
     private List<InterviewRoundDto> interviewRounds;
@@ -115,11 +114,11 @@ public class CandidateDetailDto implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
