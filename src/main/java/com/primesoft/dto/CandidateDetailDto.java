@@ -1,87 +1,30 @@
-package com.primesoft.entity;
+package com.primesoft.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "candidate_details")
-public class CandidateDetail {
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator",
-            parameters = {
-                    @Parameter(
-                            name = "uuid_gen_strategy_class",
-                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
-                    )
-            }
-    )
-    @Column(name = "id", updatable = false, nullable = false)
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class CandidateDetailDto implements Serializable {
     private UUID id;
-
-    @Column(name = "candidate_name", nullable = false)
     private String candidateName;
-
-
-    @Column(name = "email", nullable = false)
     private String email;
-
-
-    @Column(name = "mobile", nullable = false)
     private String mobile;
-
-    @Column(name = "job_id", nullable = false)
     private Integer jobId;
-
-
-    @Column(name = "communication_skills", nullable = false)
     private String communicationSkills;
-
-
-    @Column(name = "domain_knowldge")
     private String domainKnowldge;
-
-
-    @Column(name = "collaboration_skills", nullable = false)
     private String collaborationSkills;
-
-
-    @Column(name = "culture_fit", nullable = false)
     private String cultureFit;
-
-    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
-
-
-    @Column(name = "created_by", nullable = false)
     private String createdBy;
-
-    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
-    @Column(name = "updated_by")
     private String updatedBy;
-
-
-    @OneToMany(mappedBy = "candidateDetail", orphanRemoval = true)
-    private List<DomainKnowledge> domainKnowledges;
-
-    @OneToMany(mappedBy = "candidateDetail", orphanRemoval = true)
-    private List<InterviewRound> interviewRounds;
+    private List<DomainKnowledgeDto> domainKnowledges;
+    private List<InterviewRoundDto> interviewRounds;
 
     public UUID getId() {
         return id;
@@ -187,19 +130,19 @@ public class CandidateDetail {
         this.updatedBy = updatedBy;
     }
 
-    public List<DomainKnowledge> getDomainKnowledges() {
+    public List<DomainKnowledgeDto> getDomainKnowledges() {
         return domainKnowledges;
     }
 
-    public void setDomainKnowledges(List<DomainKnowledge> domainKnowledges) {
+    public void setDomainKnowledges(List<DomainKnowledgeDto> domainKnowledges) {
         this.domainKnowledges = domainKnowledges;
     }
 
-    public List<InterviewRound> getInterviewRounds() {
+    public List<InterviewRoundDto> getInterviewRounds() {
         return interviewRounds;
     }
 
-    public void setInterviewRounds(List<InterviewRound> interviewRounds) {
+    public void setInterviewRounds(List<InterviewRoundDto> interviewRounds) {
         this.interviewRounds = interviewRounds;
     }
 }
